@@ -8,17 +8,17 @@ from shutil import copyfile
 # pathToFile = os.path.abspath(os.path.dirname(sys.argv[0]))
 # pathToFile2 = 'C:\\User\\I.Nuriakhmetov\\Desktop\\filefoMichail'
 
-
+# открытие файла на чтение и закрытие
 def get_contents(path_to_file):
     with open(path_to_file) as fileStream:
         data = fileStream.read()
         fileStream.close()
         # print(data)
         return data
-
+# перезапись содержимого файла
 def put_contents(path_to_file, contents):
     open(path_to_file, 'w').write(contents)
-
+# возвращает файл с нужным солвером
 def get_path_to_solver_file(paths_to_files, solver_key):
     for path_to_file in paths_to_files:
         for line in open(path_to_file).read().splitlines():
@@ -26,7 +26,7 @@ def get_path_to_solver_file(paths_to_files, solver_key):
                 return path_to_file
 
     return None
-
+# получение блоков SUBCASE и содержимого LOADS
 def get_subcases_and_loads_line_indexes(lines):
     subcases_and_loads_line_indexes = dict()
     subcase_line_index = None
@@ -51,7 +51,7 @@ def get_subcases_and_loads_line_indexes(lines):
             is_subcase_body = False
 
     return subcases_and_loads_line_indexes
-
+# вставка SUBCASE и LOADS из одного файла в другой
 def insert_subcases_with_loads(lines, new_lines, subcases_and_loads_line_indexes):
     is_subcase_body = False
     subcase = load = index_after_subcase_1 = None
